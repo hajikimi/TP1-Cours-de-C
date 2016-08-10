@@ -1,30 +1,26 @@
 #include <iostream>
 using namespace std;
 
-const double rabais = 0.01;
+const double tauxRabais = 0.01;
 const double prixPois1 = 0.45; 
 const double prixPois2 = 0.90;
 const double prixPois3 = 1.10;
 const double prixPois4 = 1.50;
-const double taxe1 = 0.0775;
-const double taxe2 = 0.0775;
+const double taxe1 = 0.05;
+const double taxe2 = 0.09975;
 
 void main() {
-	double pois, somme, sousTotale, nblettre;
+	double pois, somme, sousTotale, prixTaxe1, prixTaxe2, rabais, nblettre;
 	
 	sousTotale = 0;
 	nblettre = 0;
 
 	do {
-		do{
+		//do{
 		cout << "saisir le pois de la lettre : " << endl;
 		cin >> pois;
-		} while (pois > 0);
-		{
-			if (pois < 0){
-			cout << "saisir un chiffre positif" << endl;
-			}
-		}
+		//} while (pois > 0);
+		
 
 		if (pois >= 120 ) {
 			sousTotale = sousTotale + prixPois4;
@@ -42,15 +38,33 @@ void main() {
 		nblettre = nblettre + 1;
 
 	} while (pois != 0);
-	if (sousTotale > 20) {
-		somme = sousTotale - (sousTotale * rabais);
 
+
+	prixTaxe1 = sousTotale * taxe1;
+	prixTaxe2 = sousTotale * taxe2;
+
+	if (sousTotale > 20) {
+
+		somme = (sousTotale - (sousTotale * tauxRabais)) + sousTotale * (taxe1 + taxe2);
+		rabais = sousTotale * tauxRabais;
+
+		cout << " Sous totale : " << sousTotale << endl;
+		cout << " Reduction : " << rabais << endl;
+		cout << " TPS (5%)  : " << prixTaxe1 << endl;
+		cout << " TVQ (9.975%)  : " << prixTaxe2 << endl;
+		cout << " Totale : " << somme << endl;
 
 	}
 	else {
-		somme = sousTotale;
+		somme = sousTotale + sousTotale * (taxe1 + taxe2);
+
+		cout << " Sous totale : " << sousTotale << endl;
+		cout << " Reduction : " << 0 << endl;
+		cout << " TPS (5%)  : " << prixTaxe1 << endl;
+		cout << " TVQ (9.975%)  : " << prixTaxe2 << endl;
+		cout << " Totale : " << somme << endl;
 	}
 
+			
 
-	
 }
